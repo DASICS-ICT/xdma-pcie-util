@@ -2,4 +2,5 @@
 pcie-util
 load_workload
 remote/*
+!remote/.gitkeep
 .Xil
