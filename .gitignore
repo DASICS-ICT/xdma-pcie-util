@@ -4,3 +4,5 @@ load_workload
 remote/*
 !remote/.gitkeep
 .Xil
+vivado*
+webtalk*

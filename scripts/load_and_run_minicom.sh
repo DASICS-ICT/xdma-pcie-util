@@ -27,15 +27,22 @@ elif [ $# -eq 3 ]; then
         exit 1
     fi
 
-    echo "Assert reset"
+    echo "Assert core reset"
     ./src/pcie-util $xdma_user write 0x100000 1
+
+    # echo "Assert SoC resetn"
+    # ./src/pcie-util $xdma_user write 0x200000 0
 
     echo "Load $bootrom"
     ./src/pcie-util $xdma_user load 0x0 0x10000 $bootrom
 
     echo "Load $fw_payload"
     ./src/load_workload 0x80000000 0x10000000 $fw_payload
-    echo "Deassert reset"
+
+    # echo "Dessert SoC resetn"
+    # ./src/pcie-util $xdma_user write 0x200000 1
+
+    echo "Deassert core reset"
     ./src/pcie-util $xdma_user write 0x100000 0
 
     echo "Start serial connection"
