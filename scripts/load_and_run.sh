@@ -10,7 +10,7 @@ fi
 
 if [ $# -eq 1 ]; then
 
-    ./src/pcie-util $xdma_user uart 0x11000
+    ./build/pcie-util $xdma_user uart 0x11000
 
 elif [ $# -eq 3 ]; then
 
@@ -28,25 +28,25 @@ elif [ $# -eq 3 ]; then
     fi
 
     echo "Assert core reset"
-    ./src/pcie-util $xdma_user write 0x100000 1
+    ./build/pcie-util $xdma_user write 0x100000 1
 
     # echo "Assert SoC resetn"
-    # ./src/pcie-util $xdma_user write 0x200000 0
+    # ./build/pcie-util $xdma_user write 0x200000 0
 
     echo "Load $bootrom"
-    ./src/pcie-util $xdma_user load 0x0 0x10000 $bootrom
+    ./build/pcie-util $xdma_user load 0x0 0x10000 $bootrom
 
     echo "Load $fw_payload"
-    ./src/load_workload 0x80000000 0x10000000 $fw_payload
+    ./build/load_workload 0x80000000 0x10000000 $fw_payload
 
     # echo "Dessert SoC resetn"
-    # ./src/pcie-util $xdma_user write 0x200000 1
+    # ./build/pcie-util $xdma_user write 0x200000 1
 
     echo "Deassert core reset"
-    ./src/pcie-util $xdma_user write 0x100000 0
+    ./build/pcie-util $xdma_user write 0x100000 0
 
     echo "Start serial connection"
-    ./src/pcie-util $xdma_user uart 0x11000
+    ./build/pcie-util $xdma_user uart 0x11000
 
 else
 

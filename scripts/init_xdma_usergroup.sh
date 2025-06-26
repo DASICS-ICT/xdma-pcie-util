@@ -21,7 +21,6 @@ if [ $? -eq 0 ]; then
 else
     groupadd "$GROUP_NAME"
     echo " - 用户组 $GROUP_NAME 创建成功"
-fi
 
 # 2. 创建udev规则
 echo "配置udev规则: $UDEV_RULE_FILE"
@@ -41,3 +40,4 @@ udevadm control --reload-rules
 udevadm trigger --subsystem-match=xdma
 
 echo -e "配置完成！"
+fi

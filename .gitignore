@@ -1,6 +1,7 @@
 *.o
 pcie-util
 load_workload
+rw_pcie_dram
 remote/*
 !remote/.gitkeep
 .Xil
