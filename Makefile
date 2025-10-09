@@ -1,6 +1,6 @@
 # 根目录Makefile
 BUILD_DIR := ./build
-XDMA_KO_PATH ?= ./xdma-ko/xdma_6.12.24-xdma.ko
+XDMA_KO_PATH ?= ./xdma-ko/xdma_6.12.24.ko
 DOWNLOAD_PATH ?= ./remote
 BOOTROM_PATH ?= $(DOWNLOAD_PATH)/bootrom.bin
 WORKLOAD_PATH ?= $(DOWNLOAD_PATH)/RV_BOOT.bin
@@ -14,6 +14,8 @@ ifeq ($(BOARD),vcu128)
     FPGA_DEVICE_TYPE := xcvu37p_0
 else ifeq ($(BOARD),s2c_vu19p)
     FPGA_DEVICE_TYPE := xcvu19p_0
+else ifeq ($(BOARD),vcu1525)
+    FPGA_DEVICE_TYPE := xcvu9p_0
 else
     FPGA_DEVICE_TYPE := unset
 endif
