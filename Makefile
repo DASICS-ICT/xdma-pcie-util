@@ -6,6 +6,7 @@ BOOTROM_PATH ?= $(DOWNLOAD_PATH)/bootrom.bin
 WORKLOAD_PATH ?= $(DOWNLOAD_PATH)/RV_BOOT.bin
 BITSTREAM_PATH ?= $(DOWNLOAD_PATH)/system.bit
 
+ONBOARD_OPTIONS ?= 
 BOARD ?= vcu128
 REMOTE_SW_DIR ?= nanhu-g/ready_for_download/proto_$(BOARD)
 REMOTE_HW_DIR ?= work_farm/hw_plat/target_nanhu-g_proto_$(BOARD)
@@ -55,11 +56,9 @@ rescan_pci:
 load_driver:
 	sudo insmod $(XDMA_KO_PATH)
 
+# 支持选项参数，默认无选项，用户可通过make load_and_run OPTIONS="--bypass --rstsoc --minicom"指定
 load_and_run:
-	./scripts/load_and_run.sh xdma0 $(BOOTROM_PATH) $(WORKLOAD_PATH)
-
-load_and_run_rstsoc:
-	./scripts/load_and_run_rstsoc.sh xdma0 $(BOOTROM_PATH) $(WORKLOAD_PATH)
+	./scripts/load_and_run.sh $(ONBOARD_OPTIONS) xdma0 $(BOOTROM_PATH) $(WORKLOAD_PATH)
 
 init_usergroup:
 	sudo ./scripts/init_xdma_usergroup.sh

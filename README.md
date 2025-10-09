@@ -52,10 +52,10 @@
     ```
 4. 运行如下命令进行FPGA上板。
     ```bash
-    make load_and_run BOOTROM_PATH=${BOOTROM_PATH} WORKLOAD_PATH=${WORKLOAD_PATH}
-    # 默认值为./remote/bootrom.bin与./remote/RV_BOOT.bin
+    make load_and_run ONBOARD_OPTIONS=${OPTIONS} BOOTROM_PATH=${BOOTROM_PATH} WORKLOAD_PATH=${WORKLOAD_PATH}
+    # ONBOARD_OPTIONS有--minicom（使用minicom作为串口终端）、--rstsoc（对外设进行reset，仅在有外设时使用）与--bypass（使用xdma bypass通道烧入bin），请根据需要使用，也可以留空。
+    # BOOTROM_PATH与WORKLOAD_PATH的默认值为./remote/bootrom.bin与./remote/RV_BOOT.bin。
     ```
     `load_and_run.sh`脚本自动完成软件烧入与终端开启，可以使用`ctrl+\`退出终端。
 
-    对于带有外设的SoC，建议将Makefile内脚本换成`load_and_run_rstsoc.sh`，在烧入bin时对外设单独进行复位；如果希望使用minicom作为终端进行上板，可以将脚本换成`load_and_run_minicom.sh`，其他不变。
 5. 可以使用`./build/rw_pcie_dram`，通过xdma驱动进行fpga dram的文件读写，详见[host和fpga通过xdma交换文件](https://aul8ejtumo.feishu.cn/wiki/MqEywZPkUiMMFVkrqTJcmlX2nve?from=from_copylink)。使用时可能需要注意核与dram之间的一致性问题。
