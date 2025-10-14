@@ -39,14 +39,14 @@ clean_tools:
 
 list_devices:
 	vivado -mode batch \
-		-source ./scripts/program_fpga.tcl \
-		-tclargs list_devices -notrace
+		-source ./scripts/program_fpga.tcl -notrace \
+		-tclargs list_devices 
 
 program_fpga:
 ifneq ($(FPGA_DEVICE_TYPE),unset)
 	vivado -mode batch \
-		-source ./scripts/program_fpga.tcl \
-		-tclargs $(FPGA_DEVICE_TYPE) $(BITSTREAM_PATH) -notrace
+		-source ./scripts/program_fpga.tcl -notrace \
+		-tclargs $(FPGA_DEVICE_TYPE) $(BITSTREAM_PATH)
 else
 	$(error BOARD is not supported.)
 endif
