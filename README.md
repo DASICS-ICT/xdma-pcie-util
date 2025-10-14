@@ -54,7 +54,7 @@
     ```bash
     make load_and_run ONBOARD_OPTIONS=${OPTIONS} BOOTROM_PATH=${BOOTROM_PATH} WORKLOAD_PATH=${WORKLOAD_PATH}
     # ONBOARD_OPTIONS有--minicom（使用minicom作为串口终端）、--rstsoc（对外设进行reset，仅在有外设时使用）与--bypass（使用xdma bypass通道烧入bin），请根据需要使用，也可以留空。
-    # --bypass选项根据SoC的XDMA EP配置决定，在目前的SoC设计中，VCU128和VCU1525使用--bypass，19P不使用，后续计划改成全部使用bypass。
+    # --bypass选项根据SoC的XDMA EP配置决定，目前配置默认启用--bypass。
     # BOOTROM_PATH与WORKLOAD_PATH的默认值为./remote/bootrom.bin与./remote/RV_BOOT.bin。
     ```
     `load_and_run.sh`脚本自动完成软件烧入与终端开启，可以使用`ctrl+\`退出终端。

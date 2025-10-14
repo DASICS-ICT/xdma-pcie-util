@@ -6,7 +6,7 @@ BOOTROM_PATH ?= $(DOWNLOAD_PATH)/bootrom.bin
 WORKLOAD_PATH ?= $(DOWNLOAD_PATH)/RV_BOOT.bin
 BITSTREAM_PATH ?= $(DOWNLOAD_PATH)/system.bit
 
-ONBOARD_OPTIONS ?= 
+ONBOARD_OPTIONS ?= "--bypass" # 默认使用bypass选项
 BOARD ?= vcu128
 REMOTE_SW_DIR ?= nanhu-g/ready_for_download/proto_$(BOARD)
 REMOTE_HW_DIR ?= work_farm/hw_plat/target_nanhu-g_proto_$(BOARD)
@@ -40,13 +40,13 @@ clean_tools:
 list_devices:
 	vivado -mode batch \
 		-source ./scripts/program_fpga.tcl \
-		-tclargs list_devices
+		-tclargs list_devices -notrace
 
 program_fpga:
 ifneq ($(FPGA_DEVICE_TYPE),unset)
 	vivado -mode batch \
 		-source ./scripts/program_fpga.tcl \
-		-tclargs $(FPGA_DEVICE_TYPE) $(BITSTREAM_PATH)
+		-tclargs $(FPGA_DEVICE_TYPE) $(BITSTREAM_PATH) -notrace
 else
 	$(error BOARD is not supported.)
 endif
